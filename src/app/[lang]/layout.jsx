@@ -4,13 +4,14 @@ import { getFooter, getHeader } from "@utils/contentful/apis";
 import LayoutClient from "@components/LayoutClient";
 
 export default async function RootLayout({ children, params }) {
+  const { lang } = await params;
   const { isEnabled } = draftMode();
   const { footer } = await getFooter({
-    locale: params.lang,
+    locale: lang,
   });
 
   const { header } = await getHeader({
-    locale: params.lang,
+    locale: lang,
   });
 
   return (

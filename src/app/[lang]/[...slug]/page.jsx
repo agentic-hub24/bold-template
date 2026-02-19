@@ -3,7 +3,8 @@ import Section from "@components/Section";
 import { formatMetadata } from "@utils/contentful/formatters";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params, searchParams }, parent) {
+export async function generateMetadata(props, parent) {
+  const params = await props.params;
   const { sections } = await getLandingPage({
     slug: params.slug || "homepage", // slug testing is added as a fallback,,
     locale: params.lang,
@@ -18,7 +19,8 @@ export async function generateMetadata({ params, searchParams }, parent) {
  * @param {string} params.slug - The slug of the landing page.
  * @returns {JSX.Element} The rendered landing page.
  */
-const LandingPage = async ({ params }) => {
+const LandingPage = async (props) => {
+  const params = await props.params;
   const { sections } = await getLandingPage({
     slug: params.slug?.join("/") || "homepage", // slug testing is added as a fallback,,
     locale: params.lang,
